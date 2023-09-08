@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-#env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
+# env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
 
+# IMPORTS
 import aws_cdk as cdk
 import os
 
@@ -12,12 +13,10 @@ app = cdk.App()
 
 # VARIABLES
 account = os.getenv('CDK_DEFAULT_ACCOUNT')
-source_region = "eu-central-1"
+source_region = "eu-west-1"
 target_region = "us-east-1"
 source_bucket_name = ""
 target_bucket_name = ""
-source_key_arn = ""
-target_key_arn = ""
 
 # STACKS
 iam_source = IamRoleStack(
@@ -25,8 +24,6 @@ iam_source = IamRoleStack(
     "DBC-IAMSourceStack",
     source_bucket_name=source_bucket_name,
     target_bucket_name=target_bucket_name,
-    source_key_arn = source_key_arn,
-    target_key_arn = target_key_arn,
     env=cdk.Environment(account=account, region=source_region),
 )
 
@@ -35,8 +32,6 @@ s3_source = S3SourceStack(
     "DBC-S3Sourcetack",
     source_bucket_name=source_bucket_name,
     target_bucket_name=target_bucket_name,
-    target_region = target_region,
-    target_key_arn = target_key_arn,
     env=cdk.Environment(account=account, region=source_region),
 )
 
