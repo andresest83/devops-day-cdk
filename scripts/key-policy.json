@@ -1,0 +1,27 @@
+{
+    "Version": "2012-10-17",
+    "Id": "key-consolepolicy-3",
+    "Statement": [
+        {
+            "Sid": "Enable IAM User Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::ACCOUNT:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow access for Replication Role",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::ACCOUNT:role/S3CREncryptedReplicationRole"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
