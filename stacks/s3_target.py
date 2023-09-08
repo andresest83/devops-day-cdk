@@ -15,11 +15,9 @@ class S3TargetStack(Stack):
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        target_bucket = s3.CfnBucket(
-            self,
+        target_bucket = s3.Bucket(
+            self, 
             f"{target_bucket_name}-construct",
-            bucket_name=f"{target_bucket_name}",
-            versioning_configuration=s3.CfnBucket.VersioningConfigurationProperty(
-                status="Enabled"
-            )
+            bucket_name = f"{target_bucket_name}",
+            versioned=True,
         )
